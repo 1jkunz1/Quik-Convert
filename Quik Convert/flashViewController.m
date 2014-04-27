@@ -9,19 +9,7 @@
 #import "flashViewController.h"
 
 @interface flashViewController ()
-@property (weak, nonatomic) IBOutlet UILabel *measureHeading;
-@property (weak, nonatomic) IBOutlet UILabel *tempHeading;
-@property (weak, nonatomic) IBOutlet UITextField *fTemp;
-@property (weak, nonatomic) IBOutlet UITextField *cTemp;
-@property (weak, nonatomic) IBOutlet UITextField *feet;
-@property (weak, nonatomic) IBOutlet UITextField *inches;
-@property (weak, nonatomic) IBOutlet UITextField *meters;
-@property (weak, nonatomic) IBOutlet UITextField *yards;
-@property (weak, nonatomic) IBOutlet UITextField *centimeters;
 
-
-- (IBAction)tempConvert:(id)sender;
-- (IBAction)measureConvert:(id)sender;
 
 @end
 
@@ -50,6 +38,7 @@
 }
 
 
+
 - (IBAction)tempConvert:(id)sender {
     
     double enteredInt = [_fTemp.text doubleValue ];
@@ -59,90 +48,115 @@
     
 }
 
+
+- (IBAction)clearTemp:(id)sender {
+    
+    _fTemp.text = @"";
+    _cTemp.text = @"";
+    
+
+}
+- (IBAction)clearMeasure:(id)sender {
+
+    _feet.text = @"";
+    _inches.text = @"";
+    _meters.text = @"";
+    _centimeters.text = @"";
+    _yards.text = @"";
+}
+
+
 - (IBAction)measureConvert:(id)sender {
     
-    double enteredFeet = [_feet.text doubleValue];
-    double enteredInches = [_inches.text doubleValue];
-    double enteredMeters = [_meters.text doubleValue];
-    double enteredYards = [_yards.text doubleValue];
-    double enteredCentimeters = [_centimeters.text doubleValue];
+    double enteredInches;
+    double enteredMeters;
+    double enteredYards;
+    double enteredCentimeters;
+    double enteredFeet;
     
-    if (enteredFeet == TRUE) {
+    if (_feet.hasText == TRUE && _inches.hasText == FALSE && _meters.hasText == FALSE && _centimeters.hasText == FALSE && _yards.hasText == FALSE) {
         
-        double enteredInches = [_inches.text doubleValue];
-        double enteredMeters = [_meters.text doubleValue];
-        double enteredYards = [_yards.text doubleValue];
-        double enteredCentimeters = [_centimeters.text doubleValue];
+        double enteredFeet = [_feet.text doubleValue ];
         
         enteredMeters = enteredFeet / 3.2808;
         enteredInches = enteredFeet * 12;
         enteredYards = enteredFeet * 3;
         enteredCentimeters = enteredFeet / 0.03280;
         
+        [_meters setText:[NSString stringWithFormat:@"%f",enteredMeters]];
+        [_inches setText:[NSString stringWithFormat:@"%f",enteredInches]];
+        [_yards setText:[NSString stringWithFormat:@"%f",enteredYards]];
         [_centimeters setText:[NSString stringWithFormat:@"%f",enteredCentimeters]];
-        [_centimeters setText:[NSString stringWithFormat:@"%f",enteredCentimeters]];
+        
+        
     }
     
-    else if (enteredInches== TRUE) {
+    else if (_inches.hasText == TRUE && _feet.hasText == FALSE && _meters.hasText == FALSE && _centimeters.hasText == FALSE && _yards.hasText == FALSE) {
         
-        double enteredFeet = [_feet.text doubleValue];
-        double enteredMeters = [_meters.text doubleValue];
-        double enteredYards = [_yards.text doubleValue];
-        double enteredCentimeters = [_centimeters.text doubleValue];
+        double enteredInches = [_inches.text doubleValue];
         
         enteredMeters = enteredInches / 3.2808;
         enteredFeet = enteredInches / 12;
         enteredYards = enteredInches * 3;
         enteredCentimeters = enteredInches / 0.03280;
+        
+        [_meters setText:[NSString stringWithFormat:@"%f",enteredMeters]];
+        [_feet setText:[NSString stringWithFormat:@"%f",enteredFeet]];
+        [_yards setText:[NSString stringWithFormat:@"%f",enteredYards]];
+        [_centimeters setText:[NSString stringWithFormat:@"%f",enteredCentimeters]];
             
         }
     
-    else if(enteredMeters==TRUE ) {
+    else if(_meters.hasText == TRUE && _inches.hasText == FALSE && _feet.hasText == FALSE && _centimeters.hasText == FALSE && _yards.hasText == FALSE) {
         
-        double enteredFeet = [_feet.text doubleValue];
-        double enteredInches = [_inches.text doubleValue];
-        double enteredYards = [_yards.text doubleValue];
-        double enteredCentimeters = [_centimeters.text doubleValue];
+        double enteredMeters = [_meters.text doubleValue];
         
         enteredFeet = enteredMeters * 3.2808;
         enteredInches = enteredMeters * 12;
         enteredYards = enteredMeters * 3;
         enteredCentimeters = enteredMeters / 0.03280;
         
+        [_feet setText:[NSString stringWithFormat:@"%f",enteredFeet]];
+        [_inches setText:[NSString stringWithFormat:@"%f",enteredInches]];
+        [_yards setText:[NSString stringWithFormat:@"%f",enteredYards]];
+        [_centimeters setText:[NSString stringWithFormat:@"%f",enteredCentimeters]];
+        
     }
     
-    else if (enteredYards==TRUE) {
+    else if (_yards.hasText == TRUE && _inches.hasText == FALSE && _meters.hasText == FALSE && _centimeters.hasText == FALSE && _feet.hasText == FALSE) {
         
-        double enteredFeet = [_feet.text doubleValue];
-        double enteredInches = [_inches.text doubleValue];
-        double enteredMeters = [_meters.text doubleValue];
-        double enteredCentimeters = [_centimeters.text doubleValue];
+        double enteredYards = [_yards.text doubleValue];
         
         enteredMeters = enteredYards / 3.2808;
         enteredInches = enteredYards * 12;
-        enteredFeet = enteredYards / 3;
+        enteredFeet = enteredYards * 3;
         enteredCentimeters = enteredYards / 0.03280;
+        
+        [_feet setText:[NSString stringWithFormat:@"%f",enteredFeet]];
+        [_inches setText:[NSString stringWithFormat:@"%f",enteredInches]];
+        [_meters setText:[NSString stringWithFormat:@"%f",enteredMeters]];
+        [_centimeters setText:[NSString stringWithFormat:@"%f",enteredCentimeters]];
+        
     }
     
-    else if (enteredCentimeters==TRUE) {
+    else if (_centimeters.hasText == TRUE && _inches.hasText == FALSE && _meters.hasText == FALSE && _feet.hasText == FALSE && _yards.hasText == FALSE) {
         
-        double enteredFeet = [_feet.text doubleValue];
-        double enteredInches = [_inches.text doubleValue];
-        double enteredMeters = [_meters.text doubleValue];
-        double enteredYards = [_yards.text doubleValue];
+        double enteredCentimeters = [_centimeters.text doubleValue];
         
         
         enteredMeters = enteredCentimeters / 3.2808;
         enteredInches = enteredCentimeters * 12;
         enteredYards = enteredCentimeters * 3;
         enteredFeet = enteredCentimeters * 0.03280;
+        
+        [_feet setText:[NSString stringWithFormat:@"%f",enteredFeet]];
+        [_inches setText:[NSString stringWithFormat:@"%f",enteredInches]];
+        [_meters setText:[NSString stringWithFormat:@"%f",enteredMeters]];
+        [_yards setText:[NSString stringWithFormat:@"%f",enteredYards]];
+        
+        
     
     }
-    
-    
-    
-    
-    
     
     
     }
